@@ -10,7 +10,7 @@ cd ~/bin
 echo 'Paste here latest nodejs version url: '
 read url
 wget $url
-tar -xf node*.gz
+tar -xf node*
 nodeDir=$(ls -p | grep node | grep /)
 cd $nodeDir/bin
 sudo ./npm install -g n
@@ -28,8 +28,16 @@ cd ~/.vim/bundle/YouCompleteMe
 ./install.py
 cd ../tern_for_vim
 npm install
-echo 'Changing from bash to zsh'
 cd
+echo 'Installing mongodb'
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
+echo "deb http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.listkj
+sudo apt-get update
+sudo apt-get install -y mongodb-org
+sudo service mongod start
+echo 'Installing heroku toolbelt'
+wget -O- https://toolbelt.heroku.com/install-ubuntu.sh | sh
+echo 'Changing from bash to zsh'
 sudo usermod -s /bin/zsh vagrant
 echo "Installing oh-my-zsh"
 sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
